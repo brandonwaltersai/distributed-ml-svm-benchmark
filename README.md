@@ -1,14 +1,16 @@
 # Distributed ML SVM Benchmark
 
-A portfolio-oriented reconstruction of a graduate machine-learning experiment comparing a **distributed linear SVM in Apache Spark** with a **nonlinear RBF SVM in scikit-learn** under class imbalance.
+![tests](https://github.com/brandonwaltersai/distributed-ml-svm-benchmark/actions/workflows/tests.yml/badge.svg)
+
+A reproducible benchmark refactored from graduate machine-learning work, comparing a **distributed linear SVM in Apache Spark** with a **nonlinear RBF SVM in scikit-learn** under class imbalance.
 
 The engineering question is more useful than simply asking which model has the highest accuracy:
 
 > **When does distributed scale and training speed matter more than minority-class recall, and when is the slower nonlinear model worth the cost?**
 
-## Original experiment at a glance
+## Verified historical results
 
-The source experiment used an automotive-auction dataset with **72,000+ rows and 34 columns** and the binary target `IsBadBuy`.
+The original experiment used an automotive-auction dataset with **72,000+ rows and 34 columns** and the binary target `IsBadBuy`.
 
 | Model | Training time | Accuracy | Balanced accuracy | Recall | F1 |
 |---|---:|---:|---:|---:|---:|
@@ -29,6 +31,7 @@ This repository is a cleaned, reusable implementation derived from the methodolo
 - `src/metrics.py` — consistent evaluation helpers
 - `docs/results.md` — verified historical results and engineering interpretation
 - `tests/` — lightweight tests that do not require the original course dataset
+- `.github/workflows/tests.yml` — CI for the reusable benchmark code
 
 ## Why accuracy is misleading here
 
@@ -72,9 +75,9 @@ Exact historical metrics in `docs/results.md` come from the original graduate ex
 3. **Thresholds and model family matter.** The nonlinear RBF model captured minority cases much better, at significant compute cost.
 4. **Infrastructure context matters.** Spark is attractive when scale and parallelism dominate; a nonlinear single-node model can still be preferable when minority-class capture is more important than throughput.
 
-## Provenance
+## Provenance and limitations
 
-This repository was refactored for portfolio use from Brandon Walters's DATA 660 graduate work. The original written analysis is retained privately; instructor material, course PDFs, and the source dataset are not redistributed here.
+This repository was refactored for portfolio use from Brandon Walters's DATA 660 graduate work. The original written analysis is retained privately; instructor material, course PDFs, and the source dataset are not redistributed here. Historical metrics are preserved as evidence from that experiment, while the public code is a reusable refactoring rather than a claim that the exact original environment is fully reproducible.
 
 ## Stack
 
